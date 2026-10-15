@@ -1,9 +1,9 @@
 <?php
 
 $host = "db01.dbhost.dev";
-$username = "user_455y47yfb";
-$password = "p455y47yfb";
-$database = "db_455y47yfb";
+$username = "user_4567yabar";
+$password = "p4567yabar";
+$database = "db_4567yabar";
 $port = 5051;
 
 $conn = new mysqli(
