@@ -1,23 +1,15 @@
-cd /home/workspace/my-project
-mkdir -p phpext/apt/lists/partial phpext/apt/cache/archives/partial
-OPTS="-o Dir::State::Lists=$PWD/phpext/apt/lists -o Dir::Cache=$PWD/phpext/apt/cache -o APT::Sandbox::User=studio"
-apt-get $OPTS update
-cd phpext && apt-get $OPTS download php8.4-mysql && ls
+CREATE TABLE transactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type ENUM('income', 'expense') NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    description VARCHAR(255),
+    transaction_date DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-dpkg -x php8.4-mysql_*.deb .
-find . -name "*.so"
-
-cd /home/workspace/my-project
-EXT=$(dirname $(find $PWD/phpext -name pdo_mysql.so))
-php -d extension=$EXT/mysqlnd.so -d extension=$EXT/pdo_mysql.so -m | grep -i mysql
-
-php -d extension=$EXT/mysqlnd.so -d extension=$EXT/mysqli.so -d extension=$EXT/pdo_mysql.so -S 0.0.0.0:8080 -t public
-
-https://36504f5f2b2b-0af410f0-8080.ws6.app/
-
-   cd /home/workspace/my-project
-   ls public
-
-    cd /home/workspace/my-project
-   EXT=$(dirname $(find $PWD/phpext -name pdo_mysql.so))
-   php -d extension=$EXT/mysqlnd.so -d extension=$EXT/mysqli.so -d extension=$EXT/pdo_mysql.so -S 0.0.0.0:8080 -t public
+INSERT INTO transactions
+(type, category, amount, description, transaction_date)
+VALUES
+('expense', 'Food', 300, 'Lunch', '2026-10-03');
+('grocery', 'food', 2000, 'Home', '2026-10-01');
